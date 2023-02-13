@@ -10,4 +10,19 @@ def main():
     #Открытие основного меню пользователю, выбор пункта меня
     view.display_notes_menu()
     notes_menu_choice = view.user_choice_menu_item()
-    model.selecting_note_menu_item(notes_menu_choice)
+    selecting_note_menu_item(notes_menu_choice)
+  
+#Функция обработки запроса пользователя основного меню 
+def selecting_note_menu_item(choice):
+    while True:
+        if choice == 1: 
+            view.notes_list()
+            model.open_all_notes()
+        elif choice == 6:
+          view.application_closing()
+          break
+        view.display_notes_menu()
+        choice = view.user_choice_menu_item()
+    
+    
+

@@ -1,6 +1,10 @@
+import csv
 #Функция открытия всех заметок
 def open_all_notes():
-    pass
+    with open('notes.csv', 'r', encoding='UTF-8') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            print(" - ".join(row).replace(";", " "))
 
 #Функция добавления заметок
 def adding_notes():
@@ -22,19 +26,3 @@ def selection_of_notes_by_date():
 def handle_main_menu_choice(choice):
     if choice == 2:
         exit()
-
-#Функция обработки запроса пользователя основного меню
-def selecting_note_menu_item(choice):
-    if choice == 1:
-        open_all_notes()
-    elif choice == 2:
-        adding_notes()
-    elif choice == 3:
-        editing_notes()
-    elif choice == 4:
-        deleting_notes()
-    elif choice == 5:
-        selection_of_notes_by_date()
-    elif choice == 6:
-        exit()
-
