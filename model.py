@@ -36,6 +36,24 @@ def adding_notes(title, body):
         saving_data = csv.writer(file, delimiter=';')
         saving_data.writerow([id, title, body, creation_time, ''])
 
+# Функция редактирования заметок
+def editing_notes(id, title, body):
+    notes = []
+    with open("notes.csv", "r", encoding='UTF-8') as file:
+        reader = csv.reader(file, delimiter=';')
+        for row in reader:
+            if int(row[0]) == id:
+              if title is not None:
+                row[1] = title
+              if body is not None:
+                row[2] = body
+              row[4] = time.ctime()
+            notes.append(row)
+    
+    with open("notes.csv", "w", encoding='UTF-8', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerows(notes)
+
 # Функция удаления заметок
 def delete_note(id_to_delete):
     notes = []
@@ -47,10 +65,6 @@ def delete_note(id_to_delete):
     with open("notes.csv", "w", encoding='UTF-8', newline='') as file:
         saving_data = csv.writer(file, delimiter=";")
         saving_data.writerows(notes)
-
-# Функция редактирования заметок
-def editing_notes():
-    pass
 
 # Функция выборки заметок по дате добавления
 def selection_of_notes_by_date():
