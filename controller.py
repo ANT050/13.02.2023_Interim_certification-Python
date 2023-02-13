@@ -18,6 +18,11 @@ def selecting_note_menu_item(choice):
         if choice == 1: 
             view.notes_list()
             model.open_all_notes()
+        
+        elif choice == 2:
+            title, body = view.adding_notes()
+            model.adding_notes(title, body)
+            
         elif choice == 6:
           view.application_closing()
           break

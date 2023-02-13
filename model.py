@@ -3,8 +3,6 @@ import csv
 import time
 
 # Функция открытия всех заметок
-
-
 def open_all_notes():
     notes = []
     with open('notes.csv', 'r', encoding='UTF-8') as file:
@@ -23,32 +21,36 @@ def open_all_notes():
     print(tabulate(notes, headers=['\033[91mID\033[0m', '\033[91mЗаголовок\033[0m', '\033[91mОписание заметки\033[0m',
           '\033[91mДата/время создания\033[0m', '\033[91mДата/время изменения\033[0m'], tablefmt="fancy_grid", stralign="center"))
 
+#Функция получения ID (следующего относительно последнего)
+def get_next_id():
+    with open("notes.csv", "r", encoding='UTF-8') as file:
+        reader = csv.reader(file, delimiter=';')
+        ids = [int(row[0].replace('.', '')) for row in reader if row]
+        return max(ids) + 1 if ids else 1
 
 # Функция добавления заметок
-def adding_notes():
-    pass
+def adding_notes(title, body):
+    id = get_next_id()
+    creation_time = time.strftime("%a %b %d %H:%M:%S %Y", time.localtime())
+    with open("notes.csv", "a", encoding='UTF-8', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerow([id, title, body, creation_time, ''])
+
+
 
 # Функция редактирования заметок
-
-
 def editing_notes():
     pass
 
 # Функция удаления заметок
-
-
 def deleting_notes():
     pass
 
 # Функция выборки заметок по дате добавления
-
-
 def selection_of_notes_by_date():
     pass
 
 # Функция обработки открытия основного меню
-
-
 def handle_main_menu_choice(choice):
     if choice == 2:
         print("--"*55 + "\n" +
