@@ -33,17 +33,23 @@ def adding_notes(title, body):
     id = get_next_id()
     creation_time = time.strftime("%a %b %d %H:%M:%S %Y", time.localtime())
     with open("notes.csv", "a", encoding='UTF-8', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerow([id, title, body, creation_time, ''])
+        saving_data = csv.writer(file, delimiter=';')
+        saving_data.writerow([id, title, body, creation_time, ''])
 
-
+# Функция удаления заметок
+def delete_note(id_to_delete):
+    notes = []
+    with open("notes.csv", "r", encoding='UTF-8') as file:
+        reader = csv.reader(file, delimiter=";")
+        for row in reader:
+            if int(row[0]) != id_to_delete:
+                notes.append(row)
+    with open("notes.csv", "w", encoding='UTF-8', newline='') as file:
+        saving_data = csv.writer(file, delimiter=";")
+        saving_data.writerows(notes)
 
 # Функция редактирования заметок
 def editing_notes():
-    pass
-
-# Функция удаления заметок
-def deleting_notes():
     pass
 
 # Функция выборки заметок по дате добавления

@@ -22,7 +22,13 @@ def selecting_note_menu_item(choice):
         elif choice == 2:
             title, body = view.adding_notes()
             model.adding_notes(title, body)
+            model.open_all_notes()
             
+        elif choice == 4:
+          id_to_delete = view.ask_delete_note()
+          model.delete_note(id_to_delete)
+          model.open_all_notes()
+
         elif choice == 6:
           view.application_closing()
           break
