@@ -25,9 +25,11 @@ def selecting_note_menu_item(choice):
             model.open_all_notes()
             
         elif choice == 4:
-          id_to_delete = view.ask_delete_note()
+          with open("notes.csv", "r", encoding='UTF-8') as file:
+            id_to_delete = view.ask_delete_note(file)
           model.delete_note(id_to_delete)
           model.open_all_notes()
+
 
         elif choice == 6:
           view.application_closing()

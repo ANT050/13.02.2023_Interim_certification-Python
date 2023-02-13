@@ -1,3 +1,5 @@
+import csv
+
 # Функция открытия меню
 def open_main_menu():
   print("\n" + "--"*55 + "\n" +
@@ -69,11 +71,33 @@ def adding_notes():
     return header, description
 
 #Функция удаления заметки
-def ask_delete_note():
+def ask_delete_note(file):
     print("--"*55 + "\n" + "\033[33mУдалить заметку: \033[0m")
-    id_to_delete = int(input("\n\033[36mВведите ID заметки, которую вы хотите удалить: \033[0m"))
-    print("--"*55 + "\n" + "\033[35mЗаметка успешно удалена!!!\033[0m")
+    try:
+        id_to_delete = int(input("\n\033[36mВведите ID заметки, которую вы хотите удалить: \033[0m"))
+    except ValueError:
+        print("--"*55 + "\n" + "\033[31mНеверный ввод. Пожалуйста, введите число.\033[0m")
+        return None
+
+    notes = []
+    reader = csv.reader(file, delimiter=";")
+    for row in reader:
+        notes.append(row)
+
+    if id_to_delete not in [int(note[0]) for note in notes]:
+        print("--"*55 + "\n" + "\033[31mНеверный ID. Такая заметка отсутствует в списке!!!\033[0m")
+    else:
+        notes = [note for note in notes if int(note[0]) != id_to_delete]
+        print("--"*55 + "\n" + "\033[35mЗаметка успешно удалена!!!\033[0m")
     return id_to_delete
+
+
+
+
+
+
+
+
 
 # Функция вывода сообщение при завершении работы
 def application_closing():
