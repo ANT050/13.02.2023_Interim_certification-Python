@@ -1,6 +1,7 @@
 from tabulate import tabulate
 import csv
 import time
+from datetime import datetime
 
 # Функция открытия всех заметок
 def open_all_notes():
@@ -67,8 +68,15 @@ def delete_note(id_to_delete):
         saving_data.writerows(notes)
 
 # Функция выборки заметок по дате добавления
-def selection_of_notes_by_date():
-    pass
+def selection_of_notes_by_date(date):
+  result = []
+  with open("notes.csv", "r", encoding='UTF-8') as file:
+    reader = csv.reader(file, delimiter=";")
+    for row in reader:
+      add_date = datetime.strptime(row[3], '%a %b %d %H:%M:%S %Y')
+      if add_date.strftime("%d.%m.%Y") == date:
+        result.append(row)
+  return result
 
 # Функция обработки открытия основного меню
 def handle_main_menu_choice(choice):

@@ -37,12 +37,14 @@ def selecting_note_menu_item(choice):
             id_to_delete = view.ask_delete_note(file)
             model.delete_note(id_to_delete)
           model.open_all_notes()
-
+          
+        elif choice == 5:
+           date = view.addition_date_selection()
+           result = model.selection_of_notes_by_date(date)
+           view.display_notes(result)
+         
         elif choice == 6:
           view.application_closing()
           break
         view.display_notes_menu()
         choice = view.user_choice_menu_item()
-    
-    
-

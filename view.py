@@ -1,4 +1,5 @@
 import csv
+from tabulate import tabulate
 
 # Функция открытия меню
 def open_main_menu():
@@ -116,8 +117,20 @@ def ask_delete_note(file):
         notes = [note for note in notes if int(note[0]) != id_to_delete]
         print("--"*55 + "\n" + "\033[35mЗаметка успешно удалена!!!\033[0m")
     return id_to_delete
+  
+#Функция ввода даты для поиска заметок
+def addition_date_selection():
+    print("--"*55 + "\n" + "\033[33mВыборка заметок по дате добавления: \033[0m")
+    date_selection = input("\n\033[36mВведите дату для поиска, формат ввода (дд.мм.гггг): \033[0m")
+    return date_selection
+
+#Функция вывода результата выборки заметок по дате
+def display_notes(result):
+  print("--"*55 + "\n" + "\033[35mРезультат поиска:\033[0m")
+  print(tabulate(result, headers=['\033[91mID\033[0m', '\033[91mЗаголовок\033[0m', '\033[91mОписание заметки\033[0m',
+                                  '\033[91mДата/время создания\033[0m', 
+                                  '\033[91mДата/время изменения\033[0m'], tablefmt="fancy_grid", stralign="center"))
 
 # Функция вывода сообщение при завершении работы
 def application_closing():
     print("--"*55 + "\n" + "\033[35mВы завершили работу в приложении!!!\033[0m")
-    
